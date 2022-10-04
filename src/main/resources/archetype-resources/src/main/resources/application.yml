@@ -1,0 +1,15 @@
+logging:
+  level:
+    ROOT: INFO
+    uz.anorbank: DEBUG
+
+server:
+  port: 10013
+  shutdown: graceful
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+
+keycloak:
+  security:
+    clientId: microservice

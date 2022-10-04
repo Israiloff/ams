@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: requests
+  profiles:
+    active:
+  cloud:
+    consul:
+      config:
+        fail-fast: false
+        format: yaml
+        profile-separator: '-'
+      discovery:
+        tags:
+          - profile=${spring.profiles.active}
+          - version=#project.version#
+
+      host: localhost
+      port: 8500

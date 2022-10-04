@@ -1,0 +1,98 @@
+stages:
+  - build
+  - deploy
+  - notify
+
+build:
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "qa"'
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  before_script:
+    - cp "$MAVEN_SETTINGS_XML" "$CI_PROJECT_DIR/settings.xml"
+    - echo "$REGISTRY_CERT" >> "$CI_PROJECT_DIR/ca.crt"
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "$REGISTRY_CERT" >> /kaniko/ssl/certs/ca-certificates.crt
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "$CI_PROJECT_DIR"
+      --cache=true
+      --dockerfile "$CI_PROJECT_DIR/Dockerfile"
+      --destination "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
+      --destination "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+  tags:
+    - "docker"
+
+deploy-to-test:
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "qa"'
+  image:
+    name: $REGISTRY/devops/deploy-tools
+  before_script:
+    - env
+    - eval $(ssh-agent -s)
+    - echo "$ANSIBLE_SSH_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $ANSIBLE_SERVER >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh ansible@$ANSIBLE_SERVER "ansible-playbook /etc/ansible/playbooks/deploy/test/"$CI_PROJECT_NAMESPACE"/"$CI_PROJECT_NAME".yml --extra-vars 'CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE CI_COMMIT_SHA=$CI_COMMIT_SHA RELEASE_VERSION=$CI_COMMIT_SHA'"
+  tags:
+    - "docker"
+  
+  # deploy-to-stage:
+  #   stage: deploy
+  #   rules:
+  #     - if: '$CI_COMMIT_BRANCH == "master"'
+  #   image:
+  #     name: $REGISTRY/devops/deploy-tools
+  #   before_script:
+  #     - eval $(ssh-agent -s)
+  #     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  #     - mkdir -p ~/.ssh
+  #     - chmod 700 ~/.ssh
+  #     - ssh-keyscan $ANSIBLE_SERVER >> ~/.ssh/known_hosts
+  #     - chmod 644 ~/.ssh/known_hosts
+  #   script:
+  #     - ssh $USER_DEPLOY@$ANSIBLE_SERVER "sudo -H -u ansible bash -c 'ansible-playbook /etc/ansible/playbooks/deploy/prod/mobile-backend/"$CI_PROJECT_NAME".yml --extra-vars RELEASE_VERSION=$CI_COMMIT_TAG'"
+  #   tags:
+  #     - "docker"
+  #   when: manual
+
+.notify: &notify # https://ifedyukin.ru/blog/2018/telegram_ci
+  - TIME="10"
+  - TEXT="Deploy status:$STATUS_TEXT %0A%0A Project:+$CI_PROJECT_NAME%0A User:+$GITLAB_USER_LOGIN%0A Branch:+$CI_COMMIT_REF_SLUG%0A Message:+$CI_COMMIT_MESSAGE%0A Project URL:$PROJECT_URL%0A Pipeline URL:+$CI_PROJECT_URL/pipelines/$CI_PIPELINE_ID/"
+  - curl -s --max-time $TIME -d "chat_id=$TELEGRAM_GROUP_ID&disable_web_page_preview=1&text=$TEXT" $TELEGRAM_URL > /dev/null
+
+# Notify SUCCESS only if on success and commit message do not contains (skip-ci OR skip-deploy OR skip-restart)
+notify-deploy-to-qa-success:
+  stage: notify
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "qa"'
+  image:
+    name: $REGISTRY/devops/deploy-tools
+  script:
+    - STATUS_TEXT="✅Deploy to qa success✅"
+    - *notify
+  when: on_success #deploy OK
+  tags:
+    - "docker"
+
+notify-deploy-to-qa-error:
+  stage: notify
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "qa"'
+  image:
+    name: $REGISTRY/devops/deploy-tools
+  script:
+    - STATUS_TEXT="❌😡🤦🤦❌"
+    - *notify
+  when: on_failure #deploy failed
+  tags:
+    - "docker"

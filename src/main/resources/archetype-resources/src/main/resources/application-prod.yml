@@ -1,0 +1,47 @@
+logging:
+  level:
+    ROOT: INFO
+    uz.anorbank: DEBUG
+
+server:
+  port: 10013
+  shutdown: graceful
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+
+spring:
+  application:
+    name: requests
+  cloud:
+    consul:
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}
+        enabled: true
+      enabled: true
+      host: localhost
+      port: 8500
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+    url: jdbc:postgresql://db:5432/requests_db
+    user: requests
+    password:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9080/auth/realms/REALM
+
+artemis-jms:
+  url: tcp://localhost:61616
+  clientId: UNIQUE_CLIENT_ID
+
+keycloak:
+  security:
+    clientId: microservice
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
