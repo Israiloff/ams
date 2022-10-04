@@ -12,7 +12,7 @@ server:
 
 spring:
   application:
-    name: requests
+    name: ${artifactId}
   cloud:
     consul:
       discovery:

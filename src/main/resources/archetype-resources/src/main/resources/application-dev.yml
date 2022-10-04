@@ -1,6 +1,6 @@
 spring:
   application:
-    name: requests
+    name: ${artifactId}
   cloud:
     consul:
       enabled: false

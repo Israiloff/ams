@@ -4,11 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>uz.anorbank</groupId>
-  <artifactId>requests-archetype</artifactId>
-  <version>0.0.4</version>
+  <artifactId>anor-microservice-archetype</artifactId>
+  <version>0.0.6</version>
   <packaging>maven-archetype</packaging>
 
-  <name>requests-archetype</name>
+  <name>anor-microservice-archetype</name>
 
   <build>
     <extensions>
@@ -29,9 +29,9 @@
     </pluginManagement>
   </build>
 
-  <description>requests</description>
+  <description>anor-microservice</description>
 
-  <url>https://spring.io/projects/spring-boot/requests</url>
+  <url>https://spring.io/projects/spring-boot/anor-microservice</url>
 
   <developers>
     <developer>
@@ -50,6 +50,6 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/spring-projects/spring-boot/requests</url>
+    <url>https://github.com/spring-projects/spring-boot/anor-microservice</url>
   </scm>
 </project>

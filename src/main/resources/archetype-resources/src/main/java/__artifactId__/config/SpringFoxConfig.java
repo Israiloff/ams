@@ -29,8 +29,8 @@ public class SpringFoxConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Microservice")
-                .description("Microservice description")
+                .title("${artifactId}")
+                .description("${artifactId} description")
                 .contact(new Contact("Author", "https://anorbank.uz", "author@anorbank.uz"))
                 .version("1.0.0")
                 .build();
