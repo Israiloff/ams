@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>uz.anorbank</groupId>
-  <artifactId>anor-microservice-archetype</artifactId>
-  <version>0.0.9</version>
-  <packaging>maven-archetype</packaging>
+    <groupId>uz.anorbank</groupId>
+    <artifactId>ams</artifactId>
+    <name>ams</name>
+    <packaging>maven-archetype</packaging>
+    <description>Anor microservice template generator</description>
+    <version>0.0.11</version>
 
-  <name>anor-microservice-archetype</name>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.archetype</groupId>
+                <artifactId>archetype-packaging</artifactId>
+                <version>3.2.1</version>
+            </extension>
+        </extensions>
 
-  <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.archetype</groupId>
-        <artifactId>archetype-packaging</artifactId>
-        <version>3.2.1</version>
-      </extension>
-    </extensions>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-archetype-plugin</artifactId>
-          <version>3.2.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+    <url>https://gitlab.anorbank.uz/anor-gate/ams</url>
 
-  <description>anor-microservice</description>
+    <developers>
+        <developer>
+            <name>Israiloff</name>
+            <email>sh.israiloff@gmail.com</email>
+            <organization>Anorbank</organization>
+            <organizationUrl>https://www.anorbank.uz</organizationUrl>
+        </developer>
+    </developers>
 
-  <url>https://spring.io/projects/spring-boot/anor-microservice</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
 
-  <developers>
-    <developer>
-      <name>Israiloff</name>
-      <email>sh.israiloff@gmail.com</email>
-      <organization>Anorbank</organization>
-      <organizationUrl>https://www.anorbank.uz</organizationUrl>
-    </developer>
-  </developers>
-
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-    </license>
-  </licenses>
-
-  <scm>
-    <url>https://github.com/spring-projects/spring-boot/anor-microservice</url>
-  </scm>
+    <scm>
+        <url>https://gitlab.anorbank.uz/anor-gate/ams</url>
+    </scm>
 </project>
