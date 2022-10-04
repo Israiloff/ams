@@ -1,3 +1,4 @@
+#set( $symbol_dollar = '$' )
 spring:
   application:
     name: ${artifactId}
@@ -9,8 +10,8 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/master.xml
     enabled: true
-    url: jdbc:h2:mem:requests;DB_CLOSE_DELAY=-1
-    user: requests
+    url: jdbc:h2:mem:${artifactId};DB_CLOSE_DELAY=-1
+    user: ${artifactId}
     password:
   security:
     oauth2:

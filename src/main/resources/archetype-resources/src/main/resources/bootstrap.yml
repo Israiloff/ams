@@ -1,6 +1,7 @@
+#set( $symbol_dollar = '$' )
 spring:
   application:
-    name: requests
+    name: ${artifactId}
   profiles:
     active:
   cloud:
@@ -11,7 +12,7 @@ spring:
         profile-separator: '-'
       discovery:
         tags:
-          - profile=${spring.profiles.active}
+          - profile=${symbol_dollar}{spring.profiles.active}
           - version=#project.version#
 
       host: localhost

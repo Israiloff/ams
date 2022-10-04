@@ -1,3 +1,4 @@
+#set( $symbol_dollar = '$' )
 logging:
   level:
     ROOT: INFO
@@ -16,15 +17,15 @@ spring:
   cloud:
     consul:
       discovery:
-        instanceId: ${spring.application.name}:${random.value}
+        instanceId: ${symbol_dollar}{spring.application.name}:${symbol_dollar}{random.value}
         enabled: true
       enabled: true
       host: localhost
       port: 8500
   liquibase:
     change-log: classpath:db/changelog/master.xml
-    url: jdbc:postgresql://db:5432/requests_db
-    user: requests
+    url: jdbc:postgresql://db:5432/${artifactId}_db
+    user: ${artifactId}
     password:
   security:
     oauth2:

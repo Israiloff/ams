@@ -1,3 +1,4 @@
+#set( $symbol_dollar = '$' )
 logging:
   level:
     ROOT: INFO
@@ -17,17 +18,17 @@ spring:
     consul:
       discovery:
         enabled: false
-        instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+        instanceId: ${symbol_dollar}{spring.application.name}:${symbol_dollar}{spring.application.instance-id:${symbol_dollar}{random.value}}
       config:
         enabled: false
       enabled: false
   liquibase:
     change-log: classpath:db/changelog/master.xml
     enabled: true
-    url: jdbc:h2:mem:requests;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:${artifactId};DB_CLOSE_DELAY=-1
   r2dbc:
-    url: r2dbc:h2:mem:///requests;DB_CLOSE_DELAY=-1
-    name: requests
+    url: r2dbc:h2:mem:///${artifactId};DB_CLOSE_DELAY=-1
+    name: ${artifactId}
     password:
   security:
     oauth2:

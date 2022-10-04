@@ -5,7 +5,7 @@
 
   <groupId>uz.anorbank</groupId>
   <artifactId>anor-microservice-archetype</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.9</version>
   <packaging>maven-archetype</packaging>
 
   <name>anor-microservice-archetype</name>
