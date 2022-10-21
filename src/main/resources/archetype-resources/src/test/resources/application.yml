@@ -25,7 +25,7 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/master.xml
     enabled: true
-    url: jdbc:h2:mem:${artifactId};DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:///${artifactId};DB_CLOSE_DELAY=-1
   r2dbc:
     url: r2dbc:h2:mem:///${artifactId};DB_CLOSE_DELAY=-1
     name: ${artifactId}
