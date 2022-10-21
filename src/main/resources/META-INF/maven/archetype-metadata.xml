@@ -60,4 +60,11 @@
             </includes>
         </fileSet>
     </fileSets>
+    <requiredProperties>
+        <requiredProperty key="randomUUID">
+            <defaultValue>
+                ${package.getClass().forName("java.util.UUID").getMethod("randomUUID").invoke(null).toString()}
+            </defaultValue>
+        </requiredProperty>
+    </requiredProperties>
 </archetype-descriptor>

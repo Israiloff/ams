@@ -10,7 +10,7 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/master.xml
     enabled: true
-    url: jdbc:h2:mem:${artifactId};DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:${artifactId}_db;DB_CLOSE_DELAY=-1
     user: ${artifactId}
     password:
   security:
@@ -21,4 +21,4 @@ spring:
 
 artemis-jms:
   url: tcp://localhost:61616
-  clientId: UNIQUE_CLIENT_ID
+  clientId: ${randomUUID}

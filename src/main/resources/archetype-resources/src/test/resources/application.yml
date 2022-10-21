@@ -38,7 +38,7 @@ spring:
 
 artemis-jms:
   url: tcp://localhost:61616
-  clientId: UNIQUE_CLIENT_ID
+  clientId: ${randomUUID}
 
 keycloak:
   security:
