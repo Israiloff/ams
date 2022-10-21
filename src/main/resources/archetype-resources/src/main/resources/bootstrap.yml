@@ -4,6 +4,7 @@ spring:
     name: ${artifactId}
   profiles:
     active:
+    default: dev
   cloud:
     consul:
       config:
