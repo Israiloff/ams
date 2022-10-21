@@ -13,8 +13,8 @@ spring:
         profile-separator: '-'
       discovery:
         tags:
-          - profile=${symbol_dollar}{spring.profiles.active}
-          - version=#project.version#
+          - profile=@spring.profiles.active@
+          - version=@project.version@
 
       host: localhost
       port: 8500
