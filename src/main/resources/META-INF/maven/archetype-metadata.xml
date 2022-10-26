@@ -59,6 +59,12 @@
                 <include>mvnw.cmd</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>docker</directory>
+            <includes>
+                <include>settings.xml</include>
+            </includes>
+        </fileSet>
     </fileSets>
     <requiredProperties>
         <requiredProperty key="randomUUID">
