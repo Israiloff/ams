@@ -31,6 +31,7 @@
         <liquibase-core.version>4.15.0</liquibase-core.version>
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
         <rjvalidation.version>0.0.3</rjvalidation.version>
+        <rpc4rj.version>1.0.3</rpc4rj.version>
     </properties>
 
     <dependencies>
@@ -177,7 +178,11 @@
             <artifactId>rjvalidation</artifactId>
             <version>${rjvalidation.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>uz.devops</groupId>
+            <artifactId>rpc4rj</artifactId>
+            <version>${rpc4rj.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

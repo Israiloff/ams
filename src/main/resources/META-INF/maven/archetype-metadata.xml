@@ -47,10 +47,8 @@
             </includes>
         </fileSet>
         <fileSet encoding="UTF-8">
-            <directory></directory>
+            <directory/>
             <includes>
-                <include>.gitignore</include>
-                <include>.gitlab-ci.yml</include>
                 <include>cert.crt</include>
                 <include>Dockerfile</include>
                 <include>HELP.md</include>
