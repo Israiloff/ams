@@ -13,6 +13,6 @@ will let you start without carying about project setup
   -DartifactId=YOUR_ARTEFACT_ID" "-Dversion=YOUR_INITIAL_VERSION" "-DinteractiveMode=false"***
 
 > ***AMS_VERSION*** - means version of ams which you decided to use
-> YOUR_GROUP_ID - group id of project which will be generated
-> YOUR_ARTEFACT_ID- artefact id of project which will be generated
-> YOUR_INITIAL_VERSION - version of project which will be generated
+> ***YOUR_GROUP_ID*** - group id of project which will be generated
+> ***YOUR_ARTEFACT_ID***- artefact id of project which will be generated
+> ***YOUR_INITIAL_VERSION*** - version of project which will be generated
