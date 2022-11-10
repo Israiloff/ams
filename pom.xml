@@ -7,7 +7,7 @@
     <artifactId>ams</artifactId>
     <name>ams</name>
     <packaging>maven-archetype</packaging>
-    <description>Anor microservice template</description>
+    <description>Anorgate microservice template</description>
     <version>0.4.18</version>
 
     <build>
