@@ -32,6 +32,7 @@
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
         <rjvalidation.version>0.0.3</rjvalidation.version>
         <rpc4rj.version>1.0.3</rpc4rj.version>
+        <cardback-error.version>1.6.4</cardback-error.version>
     </properties>
 
     <dependencies>
@@ -182,6 +183,11 @@
             <groupId>uz.devops</groupId>
             <artifactId>rpc4rj</artifactId>
             <version>${rpc4rj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>uz.anorbank</groupId>
+            <artifactId>cardback-error</artifactId>
+            <version>${cardback-error.version}</version>
         </dependency>
     </dependencies>
 

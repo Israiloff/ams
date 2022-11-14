@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import ${package}.${artifactId}.error.UserAuthenticationException;
+import uz.anorbank.error.UserAuthenticationException;
 import ${package}.${artifactId}.model.UserCredentials;
 import ${package}.${artifactId}.service.UserService;
 
